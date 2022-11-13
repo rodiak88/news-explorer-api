@@ -6,8 +6,8 @@ const ForbiddenError = require('../errors/ForbiddenError');
 
 //return all articles
 const getAllArticles = (req, res, next) => {
-  Card.find({})
-    .then((cards) => res.status(statusCodes.OK).send({ data: articles }))
+  Article.find({})
+    .then((articles) => res.status(statusCodes.OK).send({ data: articles }))
     .catch(next);
 };
 
