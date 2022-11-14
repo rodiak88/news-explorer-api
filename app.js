@@ -7,6 +7,7 @@ const routes = require('./routes');
 const errorHandler = require('./middlewares/errorHandler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { mongoServer, limiter } = require('./utils/utils');
+require('dotenv').config();
 
 const { PORT = 3000 } = process.env;
 
