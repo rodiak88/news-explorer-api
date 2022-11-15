@@ -1,12 +1,12 @@
 const Article = require('../models/article');
-const { statusCodes } = require('../utils/utils');
+const { statusCodes } = require('../utils/consts');
 const NotFoundError = require('../errors/NotFoundError');
 const BadRequestError = require('../errors/BadRequestError');
 const ForbiddenError = require('../errors/ForbiddenError');
 
-//return all articles
+//return all articles saved by current user
 const getAllArticles = (req, res, next) => {
-  Article.find({})
+  Article.find({ owner: req.user._id })
     .then((articles) => res.status(statusCodes.OK).send({ data: articles }))
     .catch(next);
 };
@@ -17,6 +17,7 @@ const createArticle = (req, res, next) => {
     keyword,
     title,
     text,
+    date,
     source,
     link,
     image,
@@ -26,6 +27,7 @@ const createArticle = (req, res, next) => {
     keyword,
     title,
     text,
+    date,
     source,
     link,
     image,

@@ -1,4 +1,5 @@
 const express = require('express');
+require('dotenv').config({ path: './.env' });
 const helmet = require('helmet');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -6,15 +7,13 @@ const { errors } = require('celebrate');
 const routes = require('./routes');
 const errorHandler = require('./middlewares/errorHandler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const { mongoServer, limiter } = require('./utils/utils');
-require('dotenv').config();
-
-const { PORT = 3000 } = process.env;
+const { MONGO_DB, PORT } = require('./utils/config');
+const limiter = require('./middlewares/limiter');
 
 const app = express();
 app.use(helmet());
 
-mongoose.connect(mongoServer);
+mongoose.connect(MONGO_DB);
 
 app.use(express.json());
 
@@ -22,9 +21,9 @@ app.use(requestLogger);
 
 app.use(cors());
 app.options('*', cors());
+app.use(limiter);
 
 app.use(routes);
-app.use(limiter);
 
 app.use(errorLogger);
 

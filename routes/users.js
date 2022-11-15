@@ -1,10 +1,6 @@
 const router = require('express').Router();
-const { getUser, getCurrentUser } = require('../controllers/users');
-
-const { validateUserId } = require('../middlewares/validations');
+const { getCurrentUser } = require('../controllers/users');
 
 router.get('/me', getCurrentUser);
-
-router.get('/:userId', validateUserId, getUser);
 
 module.exports = router;

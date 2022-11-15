@@ -1,8 +1,8 @@
-require('dotenv').config();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-const { JWT_SECRET, statusCodes } = require('../utils/utils');
+const { JWT_SECRET } = require('../utils/config');
+const { statusCodes } = require('../utils/consts');
 const NotFoundError = require('../errors/NotFoundError');
 const ConflictError = require('../errors/ConflictError');
 const BadRequestError = require('../errors/BadRequestError');
@@ -24,11 +24,6 @@ const getUserData = (id, res, next) => {
         next(err);
       }
     });
-};
-
-//return data of user with selected id
-const getUser = (req, res, next) => {
-  getUserData(req.params.userId, res, next);
 };
 
 //return data of curret logged in user
@@ -90,7 +85,6 @@ const login = (req, res, next) => {
 };
 
 module.exports = {
-  getUser,
   getCurrentUser,
   createUser,
   login,

@@ -15,8 +15,8 @@ const articleSchema = mongoose.Schema({
     required: [true, "The 'text' field is required."],
   },
   date: {
-    type: Date,
-    default: Date.now,
+    type: String,
+    required: [true, "The 'date' field is required."],
   },
   source: {
     type: String,

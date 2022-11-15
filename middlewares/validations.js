@@ -32,9 +32,7 @@ const validateUserSignup = celebrate({
 
 const validateAddArticle = celebrate({
   body: Joi.object().keys({
-    keyword: Joi.string().required().min(2).max(30).messages({
-      'string.min': 'The "keyword" field must be longer than 2 characters.',
-      'string.max': 'The "keyword" field must be shorter than 30 characters.',
+    keyword: Joi.string().required().messages({
       'string.empty': 'The "keyword" field cannot be empty.',
     }),
     title: Joi.string().required().messages({
@@ -42,6 +40,9 @@ const validateAddArticle = celebrate({
     }),
     text: Joi.string().required().messages({
       'string.empty': 'The "text" field cannot be empty.',
+    }),
+    date: Joi.string().required().messages({
+      'string.empty': 'The "date" field cannot be empty.',
     }),
     source: Joi.string().required().messages({
       'string.empty': 'The "source" field cannot be empty.',
